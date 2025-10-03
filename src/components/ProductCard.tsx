@@ -31,7 +31,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <Link to={`/product/${product.slug}`}>
-      <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+      <Card
+        className="group overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2 hover:ring-red-500"
+      >
         <div className="relative aspect-square overflow-hidden bg-muted">
           {discount && (
             <Badge className="absolute top-3 right-3 z-10 bg-primary">
@@ -45,21 +47,23 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           />
         </div>
         <div className="p-4">
-          <h3 className="font-semibold mb-2 line-clamp-1">{product.title}</h3>
+          <h3 className="font-semibold mb-2 line-clamp-1 group-hover:text-red-600 transition">
+            {product.title}
+          </h3>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold">
-                ₹{(product.price / 100).toLocaleString()}
+                ₹{product.price.toLocaleString("en-IN")}
               </span>
               {product.compareAt && (
                 <span className="text-sm text-muted-foreground line-through">
-                  ₹{(product.compareAt / 100).toLocaleString()}
+                  ₹{product.compareAt.toLocaleString("en-IN")}
                 </span>
               )}
             </div>
           </div>
           <Button 
-            className="w-full" 
+            className="w-full bg-red-600 hover:bg-red-700 text-white"
             onClick={handleAddToCart}
           >
             <ShoppingCart className="w-4 h-4 mr-2" />
